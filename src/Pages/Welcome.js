@@ -1,86 +1,14 @@
 import React from 'react'
+import { Route } from 'react-router-dom'
 
 const Welcome = () => {
   return (
-    <h2>
-      Welcome page
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-rff <br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-
-
-
-fff
-
-
-
-
-
-      ....hii wekddhh   keyline-all
-      
-    </h2>
+   <section>
+     <h2>Welcome page</h2>
+     <Route path="/welcome/new-user">
+        <h5>WelCome, new user</h5>
+     </Route>
+   </section>
   )
 }
 

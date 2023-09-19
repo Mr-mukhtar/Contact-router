@@ -1,9 +1,10 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Welcome from './Pages/Welcome';
 import Products from './Pages/Products';
 import MainHeader from './Components/MainHeader';
 import ContactForm from './Pages/ContactForm';
+import ProductDetails from './Pages/ProductDetails';
 
 const App = () => {
   const submitHandler = async (formData) => {
@@ -33,15 +34,27 @@ const App = () => {
   return (
     <div>
       <MainHeader />
-      <Route path="/welcome">
+      <main>
+        <Switch>
+          <Route path="/" exact>
+         <Redirect to="/welcome"/>
+          </Route>
+        <Route path="/welcome">
         <Welcome />
       </Route>
-      <Route path="/products">
-        <Products />
-      </Route>
+      
       <Route path="/contact">
         <ContactForm onSubmit={submitHandler} />
       </Route>
+      <Route path="/products"  exact>
+        <Products/>
+      </Route>
+      <Route path="/products/:productID">
+        <ProductDetails/>
+      </Route>
+      
+        </Switch>
+      </main>
     </div>
   );
 };
