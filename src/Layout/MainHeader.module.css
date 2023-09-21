@@ -37,6 +37,21 @@
     padding-bottom: .25rem;
     border-bottom: 4px solid #95bcf0;
   }
+  .header button {
+    font: inherit;
+    background-color: transparent;
+    border: 0px solid white;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1.5rem;
+   
+    cursor: pointer;
+  }
+
+  .header button:hover {
+   
+    color: #38015c;
+  }
   .navLink {
     color: white;
     margin: 0 10px;

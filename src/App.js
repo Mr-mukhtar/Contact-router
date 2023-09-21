@@ -1,61 +1,49 @@
-import React from 'react';
+// App.js
+
+import React, { useContext } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Welcome from './Pages/Welcome';
 import Products from './Pages/Products';
-import MainHeader from './Components/MainHeader';
-import ContactForm from './Pages/ContactForm';
-import ProductDetails from './Pages/ProductDetails';
+import ProductDetails from './Components/product/ProductDetails'; // Ensure this import is correct
+import ContactUs from './Pages/ContactUs';
+import Layout from './Layout/Layout';
+import AuthPage from './Pages/AuthPage';
+import AuthContext from './store/auth-context';
 
 const App = () => {
-  const submitHandler = async (formData) => {
-    try {
-      const response = await fetch(
-        'https://contactus-f562c-default-rtdb.asia-southeast1.firebasedatabase.app/contact.json',
-        {
-          method: 'POST',
-          body: JSON.stringify(formData),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error('Failed to submit data.');
-      }
-
-      const data = await response.json();
-      console.log('API Response Data:', data);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
+  const authCtx = useContext(AuthContext);
 
   return (
-    <div>
-      <MainHeader />
+    <Layout>
       <main>
         <Switch>
-          <Route path="/" exact>
-         <Redirect to="/welcome"/>
+          <Route path='/' exact>
+            <Redirect to='/welcome' />
           </Route>
-        <Route path="/welcome">
-        <Welcome />
-      </Route>
-      
-      <Route path="/contact">
-        <ContactForm onSubmit={submitHandler} />
-      </Route>
-      <Route path="/products"  exact>
-        <Products/>
-      </Route>
-      <Route path="/products/:productID">
-        <ProductDetails/>
-      </Route>
-      
+          <Route path='/welcome'>
+            <Welcome />
+          </Route>
+
+          <Route path='/contact'>
+            <ContactUs />
+          </Route>
+          <Route path='/products' exact>
+            {authCtx.isLoggedIn ? <Products /> : <Redirect to='/auth' />}
+          </Route>
+          <Route path='/products/:productID'>
+            <ProductDetails />
+          </Route>
+          {!authCtx.isLoggedIn && (
+            <Route path='/auth'>
+              <AuthPage />
+            </Route>
+          )}
+          <Route path='*'>
+            <Redirect to='/' />
+          </Route>
         </Switch>
       </main>
-    </div>
+    </Layout>
   );
 };
 
